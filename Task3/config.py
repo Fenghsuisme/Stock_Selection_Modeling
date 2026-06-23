@@ -4,6 +4,7 @@
 # 註冊：https://finmindtrade.com/
 # ─────────────────────────────────────────────
 FINMIND_TOKEN = "REMOVED-FINMIND-TOKEN"
+# 專題結束就刪
 
 FINMIND_URL = "https://api.finmindtrade.com/api/v4/data"
 

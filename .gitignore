@@ -1,0 +1,27 @@
+# 虛擬環境
+venv/
+.venv/
+env/
+
+# 快取與輸出
+output/cache/
+output/*.xlsx
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
