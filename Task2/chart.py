@@ -38,7 +38,7 @@ TXN_COST      = 0.006   # 單次來回交易成本 (0.6% = 台股證交稅0.3%+�
 
 # GA 參數 (demo 想更快可調小 POP/GEN; 想更準可調大)
 GA_POP        = 16      # 族群大小
-GA_GEN        = 20      # 演化世代數 (從8提高; 論文用70, 想更接近可再調大, 但會更慢)
+GA_GEN        = 20     # 演化世代數 (從8提高; 論文用70, 想更接近可再調大, 但會更慢)
 GA_CX_PROB    = 0.7     # 交配機率
 GA_MUT_PROB   = 0.2     # 突變機率
 GA_ELITE      = 2       # 菁英保留數
@@ -766,20 +766,10 @@ if __name__ == "__main__":
     import sys
     args = sys.argv[1:]
 
-    # 使用方式:
-    #   1) python gasvr.py <資料檔>                      -> 跑 TV 驗證 (預設)
-    #   2) python gasvr.py <資料檔> save                 -> 訓練並存模型
-    #   3) python gasvr.py <新資料檔> predict            -> 載入模型, 不重訓直接選股
-    #   可加 --model 檔名 指定模型檔 (預設 ga_svr_model.pkl), 讓不同資料的模型分開存:
-    #     python gasvr.py top200.xlsx save --model model_200.pkl
-    #     python gasvr.py output\crawled_top300.xlsx save --model model_300.pkl
-    #     python gasvr.py 新檔.xlsx predict --model model_300.pkl
-    MODEL_PATH = "ga_svr_model.pkl"
-    if "--model" in args:
-        i = args.index("--model")
-        MODEL_PATH = args[i + 1]
-        del args[i:i + 2]
-
+    # 三種使用方式:
+    #   1) python gasvr.py <資料檔>            -> 跑 TV 驗證 (預設)
+    #   2) python gasvr.py <資料檔> save       -> 用全部資料訓練並存模型 ga_svr_model.pkl
+    #   3) python gasvr.py <新資料檔> predict  -> 載入 ga_svr_model.pkl, 不重訓直接選股
     mode = "tv"
     if "save" in args:
         mode = "save"; args.remove("save")
@@ -788,10 +778,10 @@ if __name__ == "__main__":
     DATA = args[0] if args else "top200.xlsx"
 
     if mode == "save":
-        train_and_save_model(DATA, model_path=MODEL_PATH, top_n=TOP_N)
+        train_and_save_model(DATA, model_path="ga_svr_model.pkl", top_n=TOP_N)
         sys.exit(0)
     if mode == "predict":
-        predict_with_saved_model(DATA, model_path=MODEL_PATH)
+        predict_with_saved_model(DATA, model_path="ga_svr_model.pkl")
         sys.exit(0)
 
     # ---- 預設: TV 驗證 ----
