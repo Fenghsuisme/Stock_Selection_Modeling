@@ -780,6 +780,12 @@ if __name__ == "__main__":
         MODEL_PATH = args[i + 1]
         del args[i:i + 2]
 
+    OUT_PATH = "ga_svr_demo_picks.csv"          # predict 模式的輸出檔 (可用 --out 改)
+    if "--out" in args:
+        i = args.index("--out")
+        OUT_PATH = args[i + 1]
+        del args[i:i + 2]
+
     mode = "tv"
     if "save" in args:
         mode = "save"; args.remove("save")
@@ -791,7 +797,7 @@ if __name__ == "__main__":
         train_and_save_model(DATA, model_path=MODEL_PATH, top_n=TOP_N)
         sys.exit(0)
     if mode == "predict":
-        predict_with_saved_model(DATA, model_path=MODEL_PATH)
+        predict_with_saved_model(DATA, model_path=MODEL_PATH, out_path=OUT_PATH)
         sys.exit(0)
 
     # ---- 預設: TV 驗證 ----
