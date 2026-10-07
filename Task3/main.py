@@ -178,8 +178,8 @@ def step3_output(records: list):
 
 
 if __name__ == "__main__":
-    if FINMIND_TOKEN == "請貼上你的token":
-        log.error("請先到 config.py 填入你的 FinMind token！")
+    if not FINMIND_TOKEN:
+        log.error("請先設定環境變數 FINMIND_TOKEN（到 https://finmindtrade.com/ 註冊取得）！")
         sys.exit(1)
 
     log.info(f"Task 3 (FinMind) 開始：{START_YEAR}~{END_YEAR}，每年前{TOP_N}支")

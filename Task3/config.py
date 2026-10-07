@@ -1,10 +1,13 @@
 # config.py — 全域設定（FinMind 版本）
 
+import os
+
 # ─────────────────────────────────────────────
 # 註冊：https://finmindtrade.com/
+# 請將你的 FinMind token 設為環境變數 FINMIND_TOKEN，例如：
+#   export FINMIND_TOKEN="你的token"
 # ─────────────────────────────────────────────
-FINMIND_TOKEN = "REMOVED-FINMIND-TOKEN"
-# 專題結束就刪
+FINMIND_TOKEN = os.environ.get("FINMIND_TOKEN", "")
 
 FINMIND_URL = "https://api.finmindtrade.com/api/v4/data"
 
